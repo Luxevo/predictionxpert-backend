@@ -16,7 +16,7 @@ const server = app.listen(PORT, () => {
 ║  Status:      Running                                         ║
 ║  Environment: ${config.nodeEnv.padEnd(45)}║
 ║  Port:        ${String(PORT).padEnd(45)}║
-║  API Docs:    http://localhost:${PORT}/api${' '.repeat(28)}║
+║  API Docs:    http://localhost:${PORT}/docs${' '.repeat(28)}║
 ║  Health:      http://localhost:${PORT}/health${' '.repeat(25)}║
 ╚═══════════════════════════════════════════════════════════════╝
   `);
