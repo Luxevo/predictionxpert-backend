@@ -3,9 +3,11 @@ import express, { Application, Request, Response, NextFunction } from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
 import rateLimit from 'express-rate-limit';
+import swaggerUi from 'swagger-ui-express';
 
 import { config } from './config/index.js';
 import routes from './routes/index.js';
+import { swaggerSpec } from './config/swagger.js';
 
 // Create Express application
 const app: Application = express();
@@ -81,6 +83,21 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   });
   
   next();
+});
+
+// ============================================================================
+// Swagger Documentation
+// ============================================================================
+
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
+  customCss: '.swagger-ui .topbar { display: none }',
+  customSiteTitle: 'PredictionXpert API Docs',
+}));
+
+// Serve swagger spec as JSON
+app.get('/docs.json', (_req: Request, res: Response) => {
+  res.setHeader('Content-Type', 'application/json');
+  res.send(swaggerSpec);
 });
 
 // ============================================================================

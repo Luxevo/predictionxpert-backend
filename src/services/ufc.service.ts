@@ -1,8 +1,8 @@
-// src/services/nfl.service.ts
+// src/services/ufc.service.ts
 import axios, { AxiosInstance, AxiosError } from 'axios';
 import config from '../config';
 
-class NFLService {
+class UFCService {
   private client: AxiosInstance;
   private readonly apiKey: string;
   private readonly baseUrl: string;
@@ -27,7 +27,7 @@ class NFLService {
 
   private async get<T = any>(endpoint: string, params?: Record<string, string | number | boolean>): Promise<T> {
     try {
-      const url = `/${this.apiKey}/football/${endpoint}`;
+      const url = `/${this.apiKey}/mma/${endpoint}`;
       const response = await this.client.get<T>(url, {
         params: { json: 1, ...params },
       });
@@ -36,7 +36,7 @@ class NFLService {
       if (axios.isAxiosError(error)) {
         const axiosError = error as AxiosError;
         throw new Error(
-          `Goalserve NFL API Error [${axiosError.response?.status}]: ${axiosError.message}`
+          `Goalserve UFC API Error [${axiosError.response?.status}]: ${axiosError.message}`
         );
       }
       throw error;
@@ -44,11 +44,11 @@ class NFLService {
   }
 
   async getScores(): Promise<any> {
-    return this.get('nfl-scores');
+    return this.get('live');
   }
 
   async getScoresByDate(date: string): Promise<any> {
-    return this.get('nfl-scores', { date });
+    return this.get('live', { date });
   }
 
   async getSchedule(options?: {
@@ -64,44 +64,16 @@ class NFLService {
     if (options?.date2) params.date2 = options.date2;
     if (options?.bm) params.bm = options.bm;
     if (options?.market) params.market = options.market;
-    return this.get('nfl-shedule', params);
+    return this.get('schedule', params);
   }
 
-  async getStandings(): Promise<any> {
-    return this.get('nfl-standings');
+  async getFighters(): Promise<any> {
+    return this.get('fighters');
   }
 
-  async getPlayByPlay(): Promise<any> {
-    return this.get('nfl-playbyplay-scores');
-  }
-
-  async getTeamRoster(teamId: string): Promise<any> {
-    return this.get(`${teamId}_rosters`);
-  }
-
-  async getTeamPlayerStats(teamId: string): Promise<any> {
-    return this.get(`${teamId}_player_stats`);
-  }
-
-  async getTeamInjuries(teamId: string): Promise<any> {
-    return this.get(`${teamId}_injuries`);
-  }
-
-  async getPlayerImage(playerId: string): Promise<any> {
-    return this.get('usa', { playerimage: playerId });
-  }
-
-  async getCoverage(): Promise<any> {
-    return this.get('coverage');
-  }
-
-  async getTeamStats(teamId: string): Promise<any> {
-    return this.get(`${teamId}_team_stats`);
-  }
-
-  async getH2H(teamId1: string, teamId2: string): Promise<any> {
-    return this.get(`h2h_${teamId1}-${teamId2}`);
+  async getFighterProfile(fighterId: string): Promise<any> {
+    return this.get('fighter', { profile: fighterId });
   }
 }
 
-export default new NFLService();
+export default new UFCService();
