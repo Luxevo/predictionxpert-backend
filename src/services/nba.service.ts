@@ -102,10 +102,6 @@ class NBAService {
   async getH2H(teamId1: string, teamId2: string): Promise<any> {
     return this.get('usa', { h2h: `${teamId1},${teamId2}` });
   }
-
-  async getCoverage(): Promise<any> {
-    return this.get('coverage');
-  }
 }
 
 export default new NBAService();

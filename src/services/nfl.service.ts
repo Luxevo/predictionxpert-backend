@@ -91,10 +91,6 @@ class NFLService {
     return this.get('usa', { playerimage: playerId });
   }
 
-  async getCoverage(): Promise<any> {
-    return this.get('coverage');
-  }
-
   async getTeamStats(teamId: string): Promise<any> {
     return this.get(`${teamId}_team_stats`);
   }

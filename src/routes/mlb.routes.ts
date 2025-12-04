@@ -1158,48 +1158,4 @@ router.get('/stats/nl/team-fielding', async (_req: Request, res: Response) => {
   }
 });
 
-// ============================================================================
-// MLB Coverage
-// ============================================================================
-
-/**
- * @route   GET /api/mlb/coverage
- * @desc    Get available MLB leagues/tournaments with IDs
- * @access  Public
- */
-router.get('/coverage', async (_req: Request, res: Response) => {
-  try {
-    const data = await mlbService.getCoverage();
-
-    res.json({
-      success: true,
-      data: data,
-      llm_context: 'MLB coverage - available leagues and tournaments',
-      metadata: {
-        sport: 'mlb',
-        dataType: 'coverage',
-        endpoint: '/api/mlb/coverage',
-        fetchedAt: new Date().toISOString(),
-        source: 'goalserve',
-      },
-    });
-  } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
-    res.status(500).json({
-      success: false,
-      error: {
-        code: 'GOALSERVE_API_ERROR',
-        message: errorMessage,
-      },
-      metadata: {
-        sport: 'mlb',
-        dataType: 'coverage',
-        endpoint: '/api/mlb/coverage',
-        fetchedAt: new Date().toISOString(),
-        source: 'goalserve',
-      },
-    });
-  }
-});
-
 export default router;

@@ -111,10 +111,6 @@ class MLBService {
     return this.get('mlb_leaders');
   }
 
-  async getCoverage(): Promise<any> {
-    return this.get('coverage');
-  }
-
   // League-wide player stats
   async getPlayerBattingStats(): Promise<any> {
     return this.get('mlb_player_batting');

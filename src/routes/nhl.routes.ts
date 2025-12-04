@@ -541,48 +541,4 @@ router.get('/h2h/:teamId1/:teamId2', async (req: Request, res: Response) => {
   }
 });
 
-// ============================================================================
-// NHL Coverage
-// ============================================================================
-
-/**
- * @route   GET /api/nhl/coverage
- * @desc    Get available NHL leagues/tournaments with IDs
- * @access  Public
- */
-router.get('/coverage', async (_req: Request, res: Response) => {
-  try {
-    const data = await nhlService.getCoverage();
-
-    res.json({
-      success: true,
-      data: data,
-      llm_context: 'NHL coverage - available leagues and tournaments',
-      metadata: {
-        sport: 'nhl',
-        dataType: 'coverage',
-        endpoint: '/api/nhl/coverage',
-        fetchedAt: new Date().toISOString(),
-        source: 'goalserve',
-      },
-    });
-  } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
-    res.status(500).json({
-      success: false,
-      error: {
-        code: 'GOALSERVE_API_ERROR',
-        message: errorMessage,
-      },
-      metadata: {
-        sport: 'nhl',
-        dataType: 'coverage',
-        endpoint: '/api/nhl/coverage',
-        fetchedAt: new Date().toISOString(),
-        source: 'goalserve',
-      },
-    });
-  }
-});
-
 export default router;

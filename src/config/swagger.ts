@@ -106,14 +106,6 @@ All responses include:
           responses: commonResponses,
         },
       },
-      '/api/nfl/coverage': {
-        get: {
-          tags: ['NFL'],
-          summary: 'Get NFL coverage',
-          description: 'Available leagues and tournaments with IDs',
-          responses: commonResponses,
-        },
-      },
       '/api/nfl/teams/{teamId}/roster': {
         get: {
           tags: ['NFL'],
@@ -211,13 +203,6 @@ All responses include:
           responses: commonResponses,
         },
       },
-      '/api/nba/coverage': {
-        get: {
-          tags: ['NBA'],
-          summary: 'Get NBA coverage',
-          responses: commonResponses,
-        },
-      },
       '/api/nba/teams/{teamId}/roster': {
         get: {
           tags: ['NBA'],
@@ -308,13 +293,6 @@ All responses include:
           responses: commonResponses,
         },
       },
-      '/api/nhl/coverage': {
-        get: {
-          tags: ['NHL'],
-          summary: 'Get NHL coverage',
-          responses: commonResponses,
-        },
-      },
       '/api/nhl/teams/{teamId}/roster': {
         get: {
           tags: ['NHL'],
@@ -402,13 +380,6 @@ All responses include:
         get: {
           tags: ['MLB'],
           summary: 'Get MLB play-by-play',
-          responses: commonResponses,
-        },
-      },
-      '/api/mlb/coverage': {
-        get: {
-          tags: ['MLB'],
-          summary: 'Get MLB coverage',
           responses: commonResponses,
         },
       },

@@ -447,48 +447,8 @@ router.get('/players/:playerId/image', async (req: Request, res: Response) => {
 });
 
 // ============================================================================
-// NFL Coverage & H2H
+// NFL Team Stats & H2H
 // ============================================================================
-
-/**
- * @route   GET /api/nfl/coverage
- * @desc    Get available NFL leagues/tournaments with IDs
- * @access  Public
- */
-router.get('/coverage', async (_req: Request, res: Response) => {
-  try {
-    const data = await nflService.getCoverage();
-
-    res.json({
-      success: true,
-      data: data,
-      llm_context: 'NFL coverage - available leagues and tournaments',
-      metadata: {
-        sport: 'nfl',
-        dataType: 'coverage',
-        endpoint: '/api/nfl/coverage',
-        fetchedAt: new Date().toISOString(),
-        source: 'goalserve',
-      },
-    });
-  } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
-    res.status(500).json({
-      success: false,
-      error: {
-        code: 'GOALSERVE_API_ERROR',
-        message: errorMessage,
-      },
-      metadata: {
-        sport: 'nfl',
-        dataType: 'coverage',
-        endpoint: '/api/nfl/coverage',
-        fetchedAt: new Date().toISOString(),
-        source: 'goalserve',
-      },
-    });
-  }
-});
 
 /**
  * @route   GET /api/nfl/teams/:teamId/stats
